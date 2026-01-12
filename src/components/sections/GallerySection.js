@@ -1,6 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import ScrollDownArrow from '../ScrollDownArrow';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -81,6 +82,7 @@ export default function GallerySection() {
         </SwiperSlide>
       </Swiper>
       <div className="swiper-pagination-custom absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex gap-2 justify-center"></div>
+      <ScrollDownArrow />
     </section>
   );
 }

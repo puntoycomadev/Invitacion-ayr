@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollDownArrow from '../ScrollDownArrow';
 
 export default function HeroSection() {
   return (
@@ -8,6 +9,7 @@ export default function HeroSection() {
       <div className="anagram">
         <img src="/Anagrama.svg" alt="Anagrama Ana y Luis" />
       </div>
+      <ScrollDownArrow />
     </section>
   );
 }

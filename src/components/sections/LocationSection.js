@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollDownArrow from '../ScrollDownArrow';
 
 export default function LocationSection() {
   return (
@@ -30,6 +31,7 @@ export default function LocationSection() {
       <div className='absolute bottom-0 right-0 w-1/2 lg:w-1/4'>
         <img src="/three-inf.svg" className='w-full' alt="Flor inferior derecha" />
       </div>
+      <ScrollDownArrow />
     </section>
   );
 }

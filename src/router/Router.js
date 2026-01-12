@@ -15,6 +15,14 @@ const Router = () => {
           index
           element={
             <TransitionComponent>
+              <Layers />
+            </TransitionComponent>
+          }
+        />
+        <Route
+          path="/boxes"
+          element={
+            <TransitionComponent>
               <Boxes />
             </TransitionComponent>
           }
@@ -24,14 +32,6 @@ const Router = () => {
           element={
             <TransitionComponent>
               <Scroll />
-            </TransitionComponent>
-          }
-        />
-        <Route
-          path="/layers"
-          element={
-            <TransitionComponent>
-              <Layers />
             </TransitionComponent>
           }
         />

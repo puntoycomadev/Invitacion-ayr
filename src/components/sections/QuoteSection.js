@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollDownArrow from '../ScrollDownArrow';
 
 export default function QuoteSection() {
   return (
@@ -40,6 +41,7 @@ export default function QuoteSection() {
       <div className='absolute bottom-0 left-0 w-1/2 md:w-1/4'>
         <img src="/Flor-inf.svg" className='w-full' alt="Flor inferior" />
       </div>
+      <ScrollDownArrow />
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollDownArrow from '../ScrollDownArrow';
 
 export default function DressCodeSection() {
   return (
@@ -23,6 +24,7 @@ export default function DressCodeSection() {
       <div className='flor-inferior-der'>
         <img src="/four-inf.svg" alt="Flor inferior derecha" />
       </div>
+      <ScrollDownArrow />
     </section>
   );
 }

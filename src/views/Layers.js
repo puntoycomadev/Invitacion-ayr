@@ -16,27 +16,38 @@ import Contact from '../components/sections/Contact';
 
 export default function Layers() {
   const main = useRef();
-  const { completed } = useContext(TransitionContext);
+  const { completed, toggleCompleted } = useContext(TransitionContext);
   const scrollTween = useRef();
   const snapTriggers = useRef([]);
+  const hasRunIntro = useRef(false);
   const { contextSafe } = useGSAP(
     () => {
+      // Si completed es false y no hemos ejecutado la intro, activarlo
+      if (!completed && !hasRunIntro.current) {
+        toggleCompleted(true);
+        return;
+      }
+
       if (!completed) return;
 
       /* ------------------------------------------------------------------
        * INTRO HEADER (solo una vez)
        * ------------------------------------------------------------------ */
 
-      const introTl = gsap.timeline({
-        defaults: { ease: "power3.inOut" }
-      });
+      if (!hasRunIntro.current) {
+        const introTl = gsap.timeline({
+          defaults: { ease: "power3.inOut" }
+        });
 
-      introTl
-        .set(".anagram", { scale: 1 })
-        .set(".hero-bg", { autoAlpha: 1 })
-        .to({}, { duration: 4 })
-        .to(".anagram", { scale: 0.8, y: "-30vh", duration: 3 }, 0)
-        .to(".hero-bg", { autoAlpha: 0, duration: 3 }, 0);
+        introTl
+          .set(".anagram", { scale: 1 })
+          .set(".hero-bg", { autoAlpha: 1 })
+          .to({}, { duration: 4 })
+          .to(".anagram", { scale: 0.8, y: "-30vh", duration: 3 }, 0)
+          .to(".hero-bg", { autoAlpha: 0, duration: 3 }, 0);
+
+        hasRunIntro.current = true;
+      }
 
       /* ------------------------------------------------------------------
        * SCROLL SNAP SYSTEM (panel por panel)

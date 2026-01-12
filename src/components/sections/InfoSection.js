@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollDownArrow from '../ScrollDownArrow';
 
 export default function InfoSection() {
   return (
@@ -26,6 +27,7 @@ export default function InfoSection() {
         <p className='font-cormorant text-2xl  leading-[1.25] tracking-[-0.7]'>Agradecemos que confirmes tu asistencia antes del Domingo 1 de Marzo de  2026:</p>
         <a className='text-primary font-cormorant  text-white bg-[#434430] rounded-2xl px-4 py-2 text-[#EEEDED]' href='www.google.com' target='_blank' rel='noreferrer'>CONFIRMAR</a>
       </div>
+      <ScrollDownArrow />
     </section>
   );
 }

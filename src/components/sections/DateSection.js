@@ -1,5 +1,6 @@
 import React from 'react';
 import Countdown from '../Countdown';
+import ScrollDownArrow from '../ScrollDownArrow';
 
 export default function DateSection() {
   return (
@@ -27,6 +28,7 @@ export default function DateSection() {
       <div className='absolute bottom-0 right-0 w-1/2 lg:w-1/4'>
         <img src="/two-inf.svg" className='w-full' alt="Flor inferior derecha" />
       </div>
+      <ScrollDownArrow />
     </section>
   );
 }
