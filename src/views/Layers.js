@@ -17,12 +17,8 @@ import Contact from '../components/sections/Contact';
 export default function Layers() {
   const main = useRef();
   const { completed, toggleCompleted } = useContext(TransitionContext);
-  const scrollTween = useRef();
-  const snapTriggers = useRef([]);
   const hasRunIntro = useRef(false);
-  const isAnimating = useRef(false);
-  const currentIndex = useRef(0);
-  const { contextSafe } = useGSAP(
+  useGSAP(
     () => {
       // Si completed es false y no hemos ejecutado la intro, activarlo
       if (!completed && !hasRunIntro.current) {
@@ -52,75 +48,34 @@ export default function Layers() {
       }
 
       /* ------------------------------------------------------------------
-       * SCROLL SNAP SYSTEM (panel por panel)
+       * SCROLL SNAP SYSTEM (panel por panel) - Método nativo GSAP
        * ------------------------------------------------------------------ */
 
       let panels = gsap.utils.toArray(".panel");
-      let scrollStarts = [0];
 
-      // Crear ScrollTrigger para cada panel
-      panels.forEach((panel, i) => {
-        snapTriggers.current[i] = ScrollTrigger.create({
+      // Crear un ScrollTrigger para cada panel (para animaciones u otros efectos)
+      panels.forEach((panel) => {
+        ScrollTrigger.create({
           trigger: panel,
-          start: "top top"
+          start: "top top",
+          end: "bottom top",
+          // markers: true, // Descomentar para debug
         });
       });
 
-      // Función para actualizar posiciones de snap
-      const updateSnapPositions = () => {
-        scrollStarts = snapTriggers.current.map((trigger) => trigger.start);
-      };
-
-      // Registrar el listener una sola vez
-      ScrollTrigger.addEventListener("refresh", updateSnapPositions);
-
-      // Observer para detectar scroll y hacer snap
-      ScrollTrigger.observe({
-        type: "wheel,touch",
-        tolerance: 10,
-
-        onDown() {
-          if (isAnimating.current) return;
-
-          // Calcular índice actual basado en scroll position
-          let scrollY = window.scrollY;
-          let foundIndex = scrollStarts.findIndex((start, i) => {
-            let nextStart = scrollStarts[i + 1] !== undefined ? scrollStarts[i + 1] : Infinity;
-            return scrollY >= start - 50 && scrollY < nextStart - 50;
-          });
-
-          if (foundIndex === -1) foundIndex = scrollStarts.length - 1;
-          currentIndex.current = foundIndex;
-
-          // Ir a la siguiente sección
-          if (currentIndex.current < scrollStarts.length - 1) {
-            isAnimating.current = true;
-            goToSection(currentIndex.current + 1);
-          }
-        },
-
-        onUp() {
-          if (isAnimating.current) return;
-
-          // Calcular índice actual basado en scroll position
-          let scrollY = window.scrollY;
-          let foundIndex = scrollStarts.findIndex((start, i) => {
-            let nextStart = scrollStarts[i + 1] !== undefined ? scrollStarts[i + 1] : Infinity;
-            return scrollY >= start - 50 && scrollY < nextStart - 50;
-          });
-
-          if (foundIndex === -1) foundIndex = scrollStarts.length - 1;
-          currentIndex.current = foundIndex;
-
-          // Ir a la sección anterior
-          if (currentIndex.current > 0) {
-            isAnimating.current = true;
-            goToSection(currentIndex.current - 1);
-          }
+      // Snap nativo de GSAP - mucho más simple y robusto
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        snap: {
+          snapTo: 1 / (panels.length - 1), // Snap a cada sección
+          duration: { min: 0.3, max: 1 }, // Duración basada en velocidad
+          delay: 0.1, // Pequeño delay después de que el usuario pare de scrollear
+          ease: "power2.inOut",
+          directional: true, // Snap en la dirección del scroll
         }
       });
 
-      // Inicializar posiciones
       ScrollTrigger.refresh();
     },
     {
@@ -129,22 +84,6 @@ export default function Layers() {
       revertOnUpdate: true
     }
   );
-
-  const goToSection = contextSafe((i) => {
-    console.log("scroll to", i);
-
-    // El flag ya está establecido por el Observer
-    scrollTween.current = gsap.to(window, {
-      scrollTo: { y: snapTriggers.current[i].start, autoKill: false },
-      duration: 0.7,
-      ease: "power2.inOut",
-      onComplete: () => {
-        scrollTween.current = null;
-        isAnimating.current = false;  // Resetear flag cuando termine
-      },
-      overwrite: true
-    });
-  });
 
   return (
     <main ref={main} className=''>
