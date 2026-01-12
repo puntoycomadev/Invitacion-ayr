@@ -99,9 +99,14 @@ export default function Layers() {
       );
 
       // Estado inicial - usar opacity en lugar de autoAlpha para mejor performance
-      gsap.set(contentPanels, {
-        opacity: 0,
-        y: 20
+      // Solo establecer estado inicial si el panel aún no ha sido animado
+      contentPanels.forEach((panel) => {
+        if (!panel.dataset.animated) {
+          gsap.set(panel, {
+            opacity: 0,
+            y: 20
+          });
+        }
       });
 
       // Fade IN - optimizado para móvil
@@ -114,7 +119,11 @@ export default function Layers() {
           scrollTrigger: {
             trigger: panel,
             start: "top 80%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none none",
+            once: true,
+            onEnter: () => {
+              panel.dataset.animated = 'true';
+            }
           }
         });
       });
