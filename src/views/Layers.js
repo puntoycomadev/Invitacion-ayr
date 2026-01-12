@@ -20,6 +20,8 @@ export default function Layers() {
   const scrollTween = useRef();
   const snapTriggers = useRef([]);
   const hasRunIntro = useRef(false);
+  const isAnimating = useRef(false);
+  const currentIndex = useRef(0);
   const { contextSafe } = useGSAP(
     () => {
       // Si completed es false y no hemos ejecutado la intro, activarlo
@@ -53,10 +55,10 @@ export default function Layers() {
        * SCROLL SNAP SYSTEM (panel por panel)
        * ------------------------------------------------------------------ */
 
-      let panels = gsap.utils.toArray(".panel"),
-        scrollStarts = [0],
-        snapScroll = (value) => value;
+      let panels = gsap.utils.toArray(".panel");
+      let scrollStarts = [0];
 
+      // Crear ScrollTrigger para cada panel
       panels.forEach((panel, i) => {
         snapTriggers.current[i] = ScrollTrigger.create({
           trigger: panel,
@@ -64,82 +66,61 @@ export default function Layers() {
         });
       });
 
-      ScrollTrigger.addEventListener("refresh", () => {
-        scrollStarts = snapTriggers.current.map((t) => t.start);
-        snapScroll = ScrollTrigger.snapDirectional(scrollStarts);
-      });
+      // Función para actualizar posiciones de snap
+      const updateSnapPositions = () => {
+        scrollStarts = snapTriggers.current.map((trigger) => trigger.start);
+      };
 
+      // Registrar el listener una sola vez
+      ScrollTrigger.addEventListener("refresh", updateSnapPositions);
+
+      // Observer para detectar scroll y hacer snap
       ScrollTrigger.observe({
         type: "wheel,touch",
-        onChangeY(self) {
-          if (!scrollTween.current) {
-            // En touch, deltaY es negativo cuando scrolleas hacia abajo
-            // En wheel, deltaY es positivo cuando scrolleas hacia abajo
-            const delta = self.event.type.includes('touch') ? -self.deltaY : self.deltaY;
+        tolerance: 10,
 
-            const scrollTarget = snapScroll(
-              self.scrollY() + delta,
-              delta > 0 ? 1 : -1
-            );
+        onDown() {
+          if (isAnimating.current) return;
 
-            const index = scrollStarts.indexOf(scrollTarget);
-            if (index !== -1) {
-              goToSection(index);
-            }
+          // Calcular índice actual basado en scroll position
+          let scrollY = window.scrollY;
+          let foundIndex = scrollStarts.findIndex((start, i) => {
+            let nextStart = scrollStarts[i + 1] !== undefined ? scrollStarts[i + 1] : Infinity;
+            return scrollY >= start - 50 && scrollY < nextStart - 50;
+          });
+
+          if (foundIndex === -1) foundIndex = scrollStarts.length - 1;
+          currentIndex.current = foundIndex;
+
+          // Ir a la siguiente sección
+          if (currentIndex.current < scrollStarts.length - 1) {
+            isAnimating.current = true;
+            goToSection(currentIndex.current + 1);
+          }
+        },
+
+        onUp() {
+          if (isAnimating.current) return;
+
+          // Calcular índice actual basado en scroll position
+          let scrollY = window.scrollY;
+          let foundIndex = scrollStarts.findIndex((start, i) => {
+            let nextStart = scrollStarts[i + 1] !== undefined ? scrollStarts[i + 1] : Infinity;
+            return scrollY >= start - 50 && scrollY < nextStart - 50;
+          });
+
+          if (foundIndex === -1) foundIndex = scrollStarts.length - 1;
+          currentIndex.current = foundIndex;
+
+          // Ir a la sección anterior
+          if (currentIndex.current > 0) {
+            isAnimating.current = true;
+            goToSection(currentIndex.current - 1);
           }
         }
       });
 
-      /* ------------------------------------------------------------------
-       * FADE SUAVE ENTRE SECCIONES (NO HERO)
-       * ------------------------------------------------------------------ */
-
-      const contentPanels = panels.filter(
-        (panel) => !panel.classList.contains("hero")
-      );
-
-      // Fade IN/OUT - optimizado para móvil con animación bidireccional
-      contentPanels.forEach((panel) => {
-        ScrollTrigger.create({
-          trigger: panel,
-          start: "top 80%",
-          end: "bottom 20%",
-          onEnter: () => {
-            gsap.to(panel, {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "power1.out"
-            });
-          },
-          onLeave: () => {
-            gsap.to(panel, {
-              opacity: 0,
-              y: -20,
-              duration: 0.4,
-              ease: "power1.in"
-            });
-          },
-          onEnterBack: () => {
-            gsap.to(panel, {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "power1.out"
-            });
-          },
-          onLeaveBack: () => {
-            gsap.to(panel, {
-              opacity: 0,
-              y: 20,
-              duration: 0.4,
-              ease: "power1.in"
-            });
-          }
-        });
-      });
-
-      // Forzar cálculo inicial
+      // Inicializar posiciones
       ScrollTrigger.refresh();
     },
     {
@@ -151,11 +132,16 @@ export default function Layers() {
 
   const goToSection = contextSafe((i) => {
     console.log("scroll to", i);
+
+    // El flag ya está establecido por el Observer
     scrollTween.current = gsap.to(window, {
       scrollTo: { y: snapTriggers.current[i].start, autoKill: false },
       duration: 0.7,
       ease: "power2.inOut",
-      onComplete: () => (scrollTween.current = null),
+      onComplete: () => {
+        scrollTween.current = null;
+        isAnimating.current = false;  // Resetear flag cuando termine
+      },
       overwrite: true
     });
   });

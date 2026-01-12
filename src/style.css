@@ -57,9 +57,8 @@ body {
 }
 
 .panel:not(.hero) {
-  opacity: 0;
-  transform: translateY(20px);
-  will-change: opacity, transform;
+  opacity: 1;
+  will-change: transform;
 }
 
 .anagram img {
