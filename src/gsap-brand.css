@@ -525,8 +525,6 @@ button {
 
 .panel {
   min-height: 100vh;
-  padding-left: 0.6rem;
-  padding-right: 0.6rem;
   color: var(--dark);
 }
 
@@ -556,6 +554,9 @@ button {
 .panel.red {
   background-color: #c82736;
   background-image: var(--gradient-lipstick);
+}
+.panel.base {
+  background-color: #F9F7F7;
 }
 
 .panel.purple {

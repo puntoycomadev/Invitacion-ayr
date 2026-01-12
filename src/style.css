@@ -1,6 +1,6 @@
 html,
 body {
-  background-color: var(--dark);
+  background-color: #F9F7F7;
   color: var(--light);
   margin: 0;
   height: 100%;
@@ -22,6 +22,293 @@ body {
   border-radius: 0;
   padding: 0.5rem 1rem;
   mix-blend-mode: difference;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-color: #F9F7F7;
+  /* ejemplo elegante */
+  z-index: 3;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('../public/Portada.webp');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.anagram {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  will-change: transform;
+}
+
+.panel:not(.hero) {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.anagram img {
+  width: clamp(300px, 40vw, 600px);
+  height: auto;
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
+
+.borde-texto {
+  position: relative;
+  color: #6B725C;
+  font-size: 44px;
+  font-style: italic;
+}
+
+
+.borde-texto strong {
+  display: block;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* OVERLAYS */
+.borde-superior,
+.borde-derecho,
+.borde-inferior,
+.borde-izquierdo {
+  position: absolute;
+  background: #6B725C;
+  pointer-events: none;
+}
+
+/* líneas */
+.borde-superior {
+  top: 0;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+}
+
+.borde-inferior {
+  bottom: 0;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+}
+
+.borde-izquierdo {
+  top: 40px;
+  bottom: 40px;
+  left: 0;
+  width: 2px;
+}
+
+.borde-derecho {
+  top: 40px;
+  bottom: 40px;
+  right: 0;
+  width: 2px;
+}
+
+/* COMILLAS */
+.comillas {
+  position: absolute;
+  font-size: 140px;
+  font-weight: 700;
+  line-height: 1;
+  color: #6B725C;
+  pointer-events: none;
+}
+
+.comillas svg {
+  display: block;
+  width: 20px;
+  height: 120px;
+  color: #6B725C;
+}
+
+@media (min-width: 768px) { /* md */
+  .comillas svg {
+    width: 25px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1024px) { /* lg */
+ .borde-superior {
+  top: 0;
+  left: 80px;
+
+}
+
+.borde-inferior {
+  right: 80px;
+}
+
+.borde-izquierdo {
+  top: 80px;
+}
+
+.borde-derecho {
+  bottom: 80px;
+}
+
+  .comillas svg {
+    width: 50px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1280px) { /* xl */
+
+}
+
+@media (min-width: 1440px) {
+
+  .borde-superior {
+  top: 0;
+  left: 80px;
+
+}
+
+.borde-inferior {
+  right: 80px;
+}
+
+.borde-izquierdo {
+  top: 80px;
+}
+
+.borde-derecho {
+  bottom: 80px;
+}
+
+  .comillas svg {
+    width: 50px;
+    height: 120px;
+  }
+}
+
+.comillas.open {
+  transform: rotate(180deg);
+  top: -45px;
+  left: 0px;
+}
+
+.comillas.close {
+  bottom: -45px;
+  right: 0px;
+}
+
+/* radio que coincide con el diseño */
+:root {
+  --radio: 40px;
+  --grosor: 2px;
+  --color: #6B725C;
+}
+
+/* ESQUINA SUPERIOR DERECHA */
+.esquina-tr {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--radio);
+  height: var(--radio);
+  border-top: var(--grosor) solid var(--color);
+  border-right: var(--grosor) solid var(--color);
+
+  border-top-right-radius: var(--radio);
+  pointer-events: none;
+}
+
+/* ESQUINA INFERIOR IZQUIERDA */
+.esquina-bl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--radio);
+  height: var(--radio);
+  border-bottom: var(--grosor) solid var(--color);
+  border-left: var(--grosor) solid var(--color);
+  border-bottom-left-radius: var(--radio);
+  pointer-events: none;
+  
+}
+
+.flor-superior {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 160px;
+}
+.flor-superior img {
+  width: 100%;
+}
+
+.flor-superior-izq {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+}
+.flor-superior-izq img {
+  width: 100%;
+}
+
+
+.flor-inferior {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 160px;
+}
+
+.flor-inferior-der {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 160px;
+}
+.flor-inferior-der  img {
+  width: 100%;
+}
+
+.flor-inferior img {
+  width: 100%;
+}
+
+.grid-fecha {
+  padding-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  grid-template-rows: repeat(2, auto);   /* 2 filas */
+  gap: 8px; /* opcional */
+  color: #6B725C;
+  font-weight: 800;
+  font-size: 36px;
+}
+
+.borde-inferior-fecha {
+  border-bottom: 3px solid #6B725C;
+}
+
+
+
+
+.two-clock-section {
+  margin-top: 60px;
 }
 
 nav {
@@ -52,6 +339,7 @@ nav li a {
   position: sticky;
   top: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -86,4 +374,105 @@ nav li a {
 .purple {
   height: 50vh;
   min-height: 50vh;
+}
+
+/* COUNTDOWN STYLES */
+.countdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: #6B725C;
+  min-width: 70px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.countdown-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6B725C;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.countdown-separator {
+  font-size: 48px;
+  font-weight: 800;
+  color: #6B725C;
+  margin: 0 4px;
+}
+
+.two-clock-section span {
+  font-size: 24px;
+  font-weight: 400;
+  color: #6B725C;
+  display: block;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* SWIPER GALLERY STYLES */
+.swiper-section {
+  padding: 0 !important;
+}
+
+.gallery-swiper {
+  width: 100%;
+  height: 100vh;
+}
+
+.swiper-image-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.swiper-image-container img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.swiper-pagination-custom {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet-active {
+  background: #6B725C;
+  width: 30px;
+  border-radius: 6px;
 }

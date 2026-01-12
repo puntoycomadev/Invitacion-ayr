@@ -4,6 +4,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 import TransitionContext from '../context/TransitionContext';
+import HeroSection from '../components/sections/HeroSection';
+import QuoteSection from '../components/sections/QuoteSection';
+import DateSection from '../components/sections/DateSection';
+import LocationSection from '../components/sections/LocationSection';
+import DressCodeSection from '../components/sections/DressCodeSection';
+import GallerySection from '../components/sections/GallerySection';
+import InfoSection from '../components/sections/InfoSection';
+import Contact from '../components/sections/Contact';
+
 
 export default function Layers() {
   const main = useRef();
@@ -13,11 +22,30 @@ export default function Layers() {
   const { contextSafe } = useGSAP(
     () => {
       if (!completed) return;
-      let panels = gsap.utils.toArray('.panel'),
-          scrollStarts = [0],
-          snapScroll = value => value; // for converting a pixel-based scroll value to the closest panel scroll position
-      
-      // create a ScrollTrigger for each panel that's only concerned about figuring out when its top hits the top of the viewport. We'll use the "start" of that ScrollTrigger to figure out snapping positions.
+
+      /* ------------------------------------------------------------------
+       * INTRO HEADER (solo una vez)
+       * ------------------------------------------------------------------ */
+
+      const introTl = gsap.timeline({
+        defaults: { ease: "power3.inOut" }
+      });
+
+      introTl
+        .set(".anagram", { scale: 1 })
+        .set(".hero-bg", { autoAlpha: 1 })
+        .to({}, { duration: 4 })
+        .to(".anagram", { scale: 0.8, y: "-30vh", duration: 3 }, 0)
+        .to(".hero-bg", { autoAlpha: 0, duration: 3 }, 0);
+
+      /* ------------------------------------------------------------------
+       * SCROLL SNAP SYSTEM (panel por panel)
+       * ------------------------------------------------------------------ */
+
+      let panels = gsap.utils.toArray(".panel"),
+        scrollStarts = [0],
+        snapScroll = (value) => value;
+
       panels.forEach((panel, i) => {
         snapTriggers.current[i] = ScrollTrigger.create({
           trigger: panel,
@@ -25,29 +53,64 @@ export default function Layers() {
         });
       });
 
-      // once all the triggers have calculated their start/end, create the snap function that'll accept an overall progress value for the overall page, and then return the closest panel snapping spot based on the direction of scroll
       ScrollTrigger.addEventListener("refresh", () => {
-        scrollStarts = snapTriggers.current.map(trigger => trigger.start); // build an Array with just the starting positions where each panel hits the top of the viewport
-        snapScroll = ScrollTrigger.snapDirectional(scrollStarts); // get a function that we can feed a pixel-based scroll value to and a direction, and then it'll spit back the closest snap position (in pixels)
+        scrollStarts = snapTriggers.current.map((t) => t.start);
+        snapScroll = ScrollTrigger.snapDirectional(scrollStarts);
       });
 
       ScrollTrigger.observe({
         type: "wheel,touch",
         onChangeY(self) {
           if (!scrollTween.current) {
-            // find the closest snapping spot based on the direction of scroll
-            let scroll = snapScroll(self.scrollY() + self.deltaY, self.deltaY > 0 ? 1 : -1);
-            goToSection(scrollStarts.indexOf(scroll)); // scroll to the index of the associated panel
+            const scrollTarget = snapScroll(
+              self.scrollY() + self.deltaY,
+              self.deltaY > 0 ? 1 : -1
+            );
+
+            const index = scrollStarts.indexOf(scrollTarget);
+            if (index !== -1) {
+              goToSection(index);
+            }
           }
         }
-      })
+      });
 
+      /* ------------------------------------------------------------------
+       * FADE SUAVE ENTRE SECCIONES (NO HERO)
+       * ------------------------------------------------------------------ */
+
+      const contentPanels = panels.filter(
+        (panel) => !panel.classList.contains("hero")
+      );
+
+      // Estado inicial
+      gsap.set(contentPanels, {
+        autoAlpha: 0,
+        y: 40
+      });
+
+      // Fade IN
+      contentPanels.forEach((panel) => {
+        gsap.to(panel, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: panel,
+            start: "top 65%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      });
+
+      // Forzar cálculo inicial
       ScrollTrigger.refresh();
     },
     {
       dependencies: [completed],
       scope: main,
-      revertOnUpdate: true,
+      revertOnUpdate: true
     }
   );
 
@@ -62,20 +125,15 @@ export default function Layers() {
   });
 
   return (
-    <main ref={main}>
-      <section className="description panel light">
-        <div>
-          <h1>Layered pinning</h1>
-          <p>Use pinning to layer panels on top of each other as you scroll.</p>
-          <div className="scroll-down">
-            Scroll down<div className="arrow"></div>
-          </div>
-        </div>
-      </section>
-      <section className="panel dark">ONE</section>
-      <section className="panel purple">TWO</section>
-      <section className="panel orange">THREE</section>
-      <section className="panel red">FOUR</section>
+    <main ref={main} className=''>
+      <HeroSection />
+      <QuoteSection />
+      <DateSection />
+      <LocationSection />
+      <DressCodeSection />
+      <GallerySection />
+      <InfoSection />
+      <Contact />
     </main>
   );
 }

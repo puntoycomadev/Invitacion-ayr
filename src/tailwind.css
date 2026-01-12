@@ -1,0 +1,36 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Fuentes personalizadas */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../public/fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../public/fonts/CormorantGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TAN Garland';
+  src: url('../public/fonts/TAN-Garland-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Colores personalizados para tu proyecto */
+@layer base {
+  :root {
+    --color-primary: #6B725C;
+    --color-background: #F9F7F7;
+  }
+}

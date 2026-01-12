@@ -6,6 +6,7 @@ import App from './App';
 
 import './gsap-brand.css';
 import './style.css';
+import './tailwind.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
