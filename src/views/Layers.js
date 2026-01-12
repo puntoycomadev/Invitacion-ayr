@@ -98,32 +98,43 @@ export default function Layers() {
         (panel) => !panel.classList.contains("hero")
       );
 
-      // Estado inicial - usar opacity en lugar de autoAlpha para mejor performance
-      // Solo establecer estado inicial si el panel aún no ha sido animado
+      // Fade IN/OUT - optimizado para móvil con animación bidireccional
       contentPanels.forEach((panel) => {
-        if (!panel.dataset.animated) {
-          gsap.set(panel, {
-            opacity: 0,
-            y: 20
-          });
-        }
-      });
-
-      // Fade IN - optimizado para móvil
-      contentPanels.forEach((panel) => {
-        gsap.to(panel, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power1.out",
-          scrollTrigger: {
-            trigger: panel,
-            start: "top 80%",
-            toggleActions: "play none none none",
-            once: true,
-            onEnter: () => {
-              panel.dataset.animated = 'true';
-            }
+        ScrollTrigger.create({
+          trigger: panel,
+          start: "top 80%",
+          end: "bottom 20%",
+          onEnter: () => {
+            gsap.to(panel, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power1.out"
+            });
+          },
+          onLeave: () => {
+            gsap.to(panel, {
+              opacity: 0,
+              y: -20,
+              duration: 0.4,
+              ease: "power1.in"
+            });
+          },
+          onEnterBack: () => {
+            gsap.to(panel, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power1.out"
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(panel, {
+              opacity: 0,
+              y: 20,
+              duration: 0.4,
+              ease: "power1.in"
+            });
           }
         });
       });
