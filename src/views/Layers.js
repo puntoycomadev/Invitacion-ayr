@@ -1,7 +1,10 @@
 import React, { useContext, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 import TransitionContext from '../context/TransitionContext';
 import HeroSection from '../components/sections/HeroSection';
@@ -18,6 +21,8 @@ export default function Layers() {
   const main = useRef();
   const { completed, toggleCompleted } = useContext(TransitionContext);
   const hasRunIntro = useRef(false);
+  const currentSection = useRef(0);
+  const isAnimating = useRef(false);
   useGSAP(
     () => {
       // Si completed es false y no hemos ejecutado la intro, activarlo
@@ -48,32 +53,43 @@ export default function Layers() {
       }
 
       /* ------------------------------------------------------------------
-       * SCROLL SNAP SYSTEM (panel por panel) - Método nativo GSAP
+       * SCROLL SNAP SYSTEM - Estilo Instagram Stories
+       * Un swipe = una sección completa
        * ------------------------------------------------------------------ */
 
       let panels = gsap.utils.toArray(".panel");
+      let panelPositions = [];
 
-      // Crear un ScrollTrigger para cada panel (para animaciones u otros efectos)
-      panels.forEach((panel) => {
-        ScrollTrigger.create({
-          trigger: panel,
-          start: "top top",
-          end: "bottom top",
-          // markers: true, // Descomentar para debug
-        });
+      // Guardar posiciones de cada panel
+      panels.forEach((panel, i) => {
+        panelPositions[i] = panel.offsetTop;
       });
 
-      // Snap nativo de GSAP - mucho más simple y robusto
-      ScrollTrigger.create({
-        start: 0,
-        end: "max",
-        snap: {
-          snapTo: 1 / (panels.length - 1), // Snap a cada sección
-          duration: { min: 0.3, max: 1 }, // Duración basada en velocidad
-          delay: 0.1, // Pequeño delay después de que el usuario pare de scrollear
+      // Función para ir a una sección específica
+      const goToSection = (index) => {
+        if (isAnimating.current) return;
+        if (index < 0 || index >= panels.length) return;
+
+        isAnimating.current = true;
+        currentSection.current = index;
+
+        gsap.to(window, {
+          scrollTo: { y: panelPositions[index], autoKill: false },
+          duration: 0.8,
           ease: "power2.inOut",
-          directional: true, // Snap en la dirección del scroll
-        }
+          onComplete: () => {
+            isAnimating.current = false;
+          }
+        });
+      };
+
+      // Observer para detectar swipe/scroll
+      ScrollTrigger.observe({
+        type: "wheel,touch,pointer",
+        onDown: () => !isAnimating.current && goToSection(currentSection.current + 1),
+        onUp: () => !isAnimating.current && goToSection(currentSection.current - 1),
+        tolerance: 10,
+        preventDefault: true
       });
 
       ScrollTrigger.refresh();
