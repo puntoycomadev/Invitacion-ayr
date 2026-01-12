@@ -75,21 +75,30 @@ export default function Layers() {
 
         gsap.to(window, {
           scrollTo: { y: panelPositions[index], autoKill: false },
-          duration: 0.8,
-          ease: "power2.inOut",
+          duration: 0.5, // Más rápido como Instagram (0.5s en vez de 0.8s)
+          ease: "power1.inOut", // Ease más suave como Instagram
           onComplete: () => {
             isAnimating.current = false;
           }
         });
       };
 
-      // Observer para detectar swipe/scroll
+      // Observer para detectar swipe/scroll - Estilo Instagram Reels
       ScrollTrigger.observe({
-        type: "wheel,touch,pointer",
-        onDown: () => !isAnimating.current && goToSection(currentSection.current + 1),
-        onUp: () => !isAnimating.current && goToSection(currentSection.current - 1),
-        tolerance: 10,
-        preventDefault: true
+        type: "wheel,touch",
+        tolerance: 5, // Más sensible (menos tolerancia)
+        preventDefault: true,
+        dragMinimum: 0, // Sin drag mínimo
+
+        // Instagram: swipe up = siguiente, swipe down = anterior
+        onUp: () => {
+          if (isAnimating.current) return;
+          goToSection(currentSection.current + 1);
+        },
+        onDown: () => {
+          if (isAnimating.current) return;
+          goToSection(currentSection.current - 1);
+        }
       });
 
       ScrollTrigger.refresh();
