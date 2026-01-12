@@ -75,8 +75,8 @@ export default function Layers() {
 
         gsap.to(window, {
           scrollTo: { y: panelPositions[index], autoKill: false },
-          duration: 0.5, // Más rápido como Instagram (0.5s en vez de 0.8s)
-          ease: "power1.inOut", // Ease más suave como Instagram
+          duration: 0.8,
+          ease: "power1.inOut",
           onComplete: () => {
             isAnimating.current = false;
           }
