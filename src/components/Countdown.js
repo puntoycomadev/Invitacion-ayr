@@ -47,25 +47,25 @@ export default function Countdown({ targetDate }) {
   }, [targetDate]);
 
   return (
-    <div className="flex items-center justify-center gap-0 ">
+    <div className="flex items-center justify-center gap-4 ">
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="countdown-number text-[64px] lg:text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.days).padStart(2, '0')}</div>
-        <div className="text-lg lg:text-[36px]  font-bold text-primary  tracking-[-0.7] font-cormorant">Días</div>
+        <div className="countdown-number text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.days).padStart(2, '0')}</div>
+        <div className="text-[36px]  font-bold text-primary  tracking-[-0.7] font-cormorant">Días</div>
       </div>
-      <div className="text-[64px] lg:text-[96px] font-extrabold text-primary font-cormorant self-center mb-6">:</div>
+      <div className="text-[96px] font-extrabold text-primary font-cormorant self-center mb-6">:</div>
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="countdown-number text-[64px] lg:text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.hours).padStart(2, '0')}</div>
-        <div className="text-lg lg:text-[36px]  font-bold text-primary  tracking-[-0.7] font-cormorant">Horas</div>
+        <div className="countdown-number text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.hours).padStart(2, '0')}</div>
+        <div className="text-[36px]  font-bold text-primary  tracking-[-0.7] font-cormorant">Horas</div>
       </div>
-      <div className="text-[64px] lg:text-[96px] font-extrabold text-primary font-cormorant self-center mb-6">:</div>
+      <div className="text-[96px] font-extrabold text-primary font-cormorant self-center mb-6">:</div>
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="countdown-number text-[64px] lg:text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.minutes).padStart(2, '0')}</div>
-        <div className="text-lg lg:text-[36px]  font-bold text-primary  tracking-[-0.7] font-cormorant">Min</div>
+        <div className="countdown-number text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.minutes).padStart(2, '0')}</div>
+        <div className="text-[36px]  font-bold text-primary  tracking-[-0.7] font-cormorant">Min</div>
       </div>
-      <div className="text-[64px] lg:text-[96px] font-extrabold text-primary font-cormorant self-center mb-6">:</div>
+      <div className="text-[96px] font-extrabold text-primary font-cormorant self-center mb-6">:</div>
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="countdown-number text-[64px] lg:text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.seconds).padStart(2, '0')}</div>
-        <div className="text-lg lg:text-[36px] font-bold text-primary  tracking-[-0.7]  font-cormorant">Seg</div>
+        <div className="countdown-number text-[96px] font-extrabold text-primary min-w-[70px] text-center transition-all duration-300 font-cormorant">{String(timeLeft.seconds).padStart(2, '0')}</div>
+        <div className="text-[36px] font-bold text-primary  tracking-[-0.7]  font-cormorant">Seg</div>
       </div>
     </div>
   );

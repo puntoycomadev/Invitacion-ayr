@@ -71,7 +71,6 @@ body {
 .borde-texto {
   position: relative;
   color: #6B725C;
-  font-size: 44px;
   font-style: italic;
 }
 
@@ -96,28 +95,28 @@ body {
 /* líneas */
 .borde-superior {
   top: 0;
-  left: 40px;
-  right: 40px;
+  left:120px;
+  right: 120px;
   height: 2px;
 }
 
 .borde-inferior {
   bottom: 0;
-  left: 40px;
-  right: 40px;
+  left: 120px;
+  right: 120px;
   height: 2px;
 }
 
 .borde-izquierdo {
-  top: 40px;
-  bottom: 40px;
+  top: 120px;
+  bottom: 120px;
   left: 0;
   width: 2px;
 }
 
 .borde-derecho {
-  top: 40px;
-  bottom: 40px;
+  top: 120px;
+  bottom: 120px;
   right: 0;
   width: 2px;
 }
@@ -134,14 +133,14 @@ body {
 
 .comillas svg {
   display: block;
-  width: 20px;
+  width: 30px;
   height: 120px;
   color: #6B725C;
 }
 
 @media (min-width: 768px) { /* md */
   .comillas svg {
-    width: 25px;
+    width: 40px;
     height: 120px;
   }
 }
@@ -214,7 +213,7 @@ body {
 
 /* radio que coincide con el diseño */
 :root {
-  --radio: 40px;
+  --radio: 120px;
   --grosor: 2px;
   --color: #6B725C;
 }

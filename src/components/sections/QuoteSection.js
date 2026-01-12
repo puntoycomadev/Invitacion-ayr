@@ -4,7 +4,7 @@ import ScrollDownArrow from '../ScrollDownArrow';
 export default function QuoteSection() {
   return (
     <section className="panel base  ">
-      <div className='absolute top-0 right-0 w-1/2 md:w-1/4'>
+      <div className='absolute top-0 right-0 w-1/2 '>
         <img src="/Flor-sup.svg" alt="Flor superior" className='w-full' />
       </div>
       <div className='px-10 md:px-[120px] xl:max-w-[1024px] mx-auto'>
@@ -34,11 +34,11 @@ export default function QuoteSection() {
           </span>
 
           {/* contenido */}
-          <p className='font-cormorant font-light tracking-tight text-[22px]  md:text-[32px] lg:text-[64px] italic px-6 pt-5 leading-[1.25] tracking-[-.7]'> Así que ya no son dos, sino una sola carne. Por lo tanto, lo que Dios ha unido, que no lo separe ningún hombre.</p>
-          <span className='font-cormorant font-bold tracking-tight text-[22px]  md:text-[28px] lg:text-[64px] italic pb-5'>Mateo 19:6</span>
+          <p className='font-cormorant font-light tracking-tight text-[56px]  lg:text-[64px] italic px-10 pt-12 leading-[1.25] tracking-[-.7]'> Así que ya no son dos, sino una sola carne. Por lo tanto, lo que Dios ha unido, que no lo separe ningún hombre.</p>
+          <span className='font-cormorant font-bold tracking-tight text-[48px] lg:text-[32px] italic pb-12'>Mateo 19:6</span>
         </div>
       </div>
-      <div className='absolute bottom-0 left-0 w-1/2 md:w-1/4'>
+      <div className='absolute bottom-0 left-0 w-1/2 '>
         <img src="/Flor-inf.svg" className='w-full' alt="Flor inferior" />
       </div>
       <ScrollDownArrow />
