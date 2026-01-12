@@ -73,9 +73,13 @@ export default function Layers() {
         type: "wheel,touch",
         onChangeY(self) {
           if (!scrollTween.current) {
+            // En touch, deltaY es negativo cuando scrolleas hacia abajo
+            // En wheel, deltaY es positivo cuando scrolleas hacia abajo
+            const delta = self.event.type.includes('touch') ? -self.deltaY : self.deltaY;
+
             const scrollTarget = snapScroll(
-              self.scrollY() + self.deltaY,
-              self.deltaY > 0 ? 1 : -1
+              self.scrollY() + delta,
+              delta > 0 ? 1 : -1
             );
 
             const index = scrollStarts.indexOf(scrollTarget);
