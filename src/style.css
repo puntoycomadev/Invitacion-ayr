@@ -58,7 +58,8 @@ body {
 
 .panel:not(.hero) {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(20px);
+  will-change: opacity, transform;
 }
 
 .anagram img {
@@ -343,6 +344,12 @@ nav li a {
   align-items: center;
   justify-content: center;
   text-align: center;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 .section {

@@ -98,22 +98,22 @@ export default function Layers() {
         (panel) => !panel.classList.contains("hero")
       );
 
-      // Estado inicial
+      // Estado inicial - usar opacity en lugar de autoAlpha para mejor performance
       gsap.set(contentPanels, {
-        autoAlpha: 0,
-        y: 40
+        opacity: 0,
+        y: 20
       });
 
-      // Fade IN
+      // Fade IN - optimizado para móvil
       contentPanels.forEach((panel) => {
         gsap.to(panel, {
-          autoAlpha: 1,
+          opacity: 1,
           y: 0,
-          duration: 2,
-          ease: "power2.out",
+          duration: 0.6,
+          ease: "power1.out",
           scrollTrigger: {
             trigger: panel,
-            start: "top 65%",
+            start: "top 80%",
             toggleActions: "play none none reverse"
           }
         });
@@ -133,7 +133,8 @@ export default function Layers() {
     console.log("scroll to", i);
     scrollTween.current = gsap.to(window, {
       scrollTo: { y: snapTriggers.current[i].start, autoKill: false },
-      duration: 1,
+      duration: 0.7,
+      ease: "power2.inOut",
       onComplete: () => (scrollTween.current = null),
       overwrite: true
     });
