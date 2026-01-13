@@ -36,6 +36,12 @@ body {
   background-color: #F9F7F7;
   /* ejemplo elegante */
   z-index: 3;
+  /* Optimizaciones para Safari móvil */
+  will-change: opacity;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .hero-image {
@@ -54,6 +60,10 @@ body {
   transform: translate(-50%, -50%);
   z-index: 4;
   will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 .panel:not(.hero) {

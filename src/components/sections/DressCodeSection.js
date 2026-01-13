@@ -19,7 +19,7 @@ export default function DressCodeSection() {
         </div>
         <p className='text-primary font-light text-[48px] pt-10'>RECOMENDACIONES</p>
       </div>
-      <p className=' pt-4 text-primary text-[60px] font-light text-base font-cormorant leading-[1.25] tracking-[-0.75] '>Evitar tacón de aguja (Hacienda-jardin)</p>
+      <p className=' pt-4 text-primary text-[60px] font-light font-cormorant leading-[1.25] tracking-[-0.75] '>Evitar tacón de aguja (Hacienda-jardin)</p>
 
       <div className='absolute bottom-0 right-0 w-1/2'>
         <img src="/four-inf.svg" className='w-full' alt="Flor inferior derecha" />

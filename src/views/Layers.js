@@ -43,11 +43,23 @@ export default function Layers() {
         });
 
         introTl
-          .set(".anagram", { scale: 1 })
-          .set(".hero-bg", { autoAlpha: 1 })
+          .set(".anagram", { scale: 1, force3D: true })
+          .set(".hero-bg", { opacity: 1, visibility: "visible", force3D: true })
           .to({}, { duration: 4 })
-          .to(".anagram", { scale: 0.8, y: "-25dvh", duration: 3 }, 0)
-          .to(".hero-bg", { autoAlpha: 0, duration: 3 }, 0);
+          .to(".anagram", {
+            scale: 0.8,
+            y: "-30dvh",
+            duration: 3,
+            force3D: true
+          }, 0)
+          .to(".hero-bg", {
+            opacity: 0,
+            duration: 3,
+            force3D: true,
+            onComplete: function() {
+              gsap.set(".hero-bg", { visibility: "hidden" });
+            }
+          }, 0);
 
         hasRunIntro.current = true;
       }
