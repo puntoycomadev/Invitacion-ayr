@@ -48,7 +48,7 @@ export default function Layers() {
           .to({}, { duration: 4 })
           .to(".anagram", {
             scale: 0.8,
-            y: "-30dvh",
+            y: "-40dvh",
             duration: 3,
             force3D: true
           }, 0)
