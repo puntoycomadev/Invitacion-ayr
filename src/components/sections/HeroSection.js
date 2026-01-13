@@ -1,4 +1,3 @@
-import React from 'react';
 import ScrollDownArrow from '../ScrollDownArrow';
 
 export default function HeroSection() {

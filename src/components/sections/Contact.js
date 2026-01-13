@@ -8,10 +8,10 @@ export default function Contact() {
                 </div>
                 <p className='text-primary text-[48px] font-garland'>CONTACTO</p>
                 <div className='flex flex-row gap-2'>
-                    <a className='text-primary font-cormorant text-2xl  bg-[#434430] text-white rounded-xl px-10 py-2 text-[#EEEDED]' href='www.google.com' target='_blank' rel='noreferrer'>ANGÉLICA</a>
-                    <a className='text-primary font-cormorant text-2xl  bg-[#434430] text-white rounded-xl px-10 py-2 text-[#EEEDED]' href='www.google.com' target='_blank' rel='noreferrer'>ROBERTO</a>
+                    <a className='text-primary font-cormorant text-[32px]  bg-[#434430] text-white rounded-xl px-10 py-2 text-[#EEEDED]' href='www.google.com' target='_blank' rel='noreferrer'>ANGÉLICA</a>
+                    <a className='text-primary font-cormorant text-[32px]  bg-[#434430] text-white rounded-xl px-10 py-2 text-[#EEEDED]' href='www.google.com' target='_blank' rel='noreferrer'>ROBERTO</a>
                 </div>
-                <div className="flex gap-2 absolute bottom-4 text-start justify-start text-sm">
+                <div className="flex gap-2 absolute bottom-4 text-start justify-start text-2xl">
                     <p>Desarrollado por Invitaciones Digitales Studio</p>
                     <p>Invitacionesdigitales.studio</p>
                 </div>

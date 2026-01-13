@@ -46,7 +46,7 @@ export default function Layers() {
           .set(".anagram", { scale: 1 })
           .set(".hero-bg", { autoAlpha: 1 })
           .to({}, { duration: 4 })
-          .to(".anagram", { scale: 0.8, y: "-30vh", duration: 3 }, 0)
+          .to(".anagram", { scale: 0.8, y: "-25dvh", duration: 3 }, 0)
           .to(".hero-bg", { autoAlpha: 0, duration: 3 }, 0);
 
         hasRunIntro.current = true;
