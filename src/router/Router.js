@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { TransitionProvider } from '../context/TransitionContext';
@@ -6,6 +5,7 @@ import TransitionComponent from '../components/Transition';
 import Boxes from '../views/Boxes';
 import Scroll from '../views/Scroll';
 import Layers from '../views/Layers';
+import Confirmacion from '../views/Confirmacion';
 
 const Router = () => {
   return (
@@ -34,6 +34,10 @@ const Router = () => {
               <Scroll />
             </TransitionComponent>
           }
+        />
+        <Route
+          path="/confirmar"
+          element={<Confirmacion />}
         />
       </Routes>
     </TransitionProvider>
