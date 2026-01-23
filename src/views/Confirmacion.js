@@ -160,19 +160,19 @@ export default function Confirmacion() {
 
   return (
     <section className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-lg">
 
         {/* PASO 1: Ingresar código */}
         {step === 1 && (
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <div className="text-center mb-8">
-              <h1 className="text-primary text-4xl font-garland mb-2">CONFIRMAR</h1>
-              <h2 className="text-primary text-3xl font-garland">ASISTENCIA</h2>
+          <div className="bg-white rounded-2xl shadow-lg p-10">
+            <div className="text-center mb-10">
+              <h1 className="text-primary text-5xl font-garland mb-3">CONFIRMAR</h1>
+              <h2 className="text-primary text-4xl font-garland">ASISTENCIA</h2>
             </div>
 
-            <form onSubmit={handleVerificarCodigo} className="space-y-6">
+            <form onSubmit={handleVerificarCodigo} className="space-y-8">
               <div>
-                <label className="block text-primary font-cormorant text-lg mb-2">
+                <label className="block text-primary font-cormorant text-xl mb-3">
                   Ingresa tu código de confirmación
                 </label>
                 <input
@@ -181,14 +181,14 @@ export default function Confirmacion() {
                   onChange={handleCodigoChange}
                   placeholder="JUA-001-A7"
                   maxLength={10}
-                  className="w-full px-4 py-3 border-2 border-primary/30 rounded-xl font-cormorant text-xl text-center uppercase tracking-widest focus:outline-none focus:border-primary transition-colors text-black"
+                  className="w-full px-5 py-4 border-2 border-primary/30 rounded-xl font-cormorant text-2xl text-center uppercase tracking-widest focus:outline-none focus:border-primary transition-colors text-black"
                   required
                   disabled={loading}
                 />
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-center font-cormorant">
+                <div className="bg-red-50 border border-red-200 text-red-700 px-5 py-4 rounded-xl text-center font-cormorant text-lg">
                   {error}
                 </div>
               )}
@@ -196,7 +196,7 @@ export default function Confirmacion() {
               <button
                 type="submit"
                 disabled={loading || !codigoConfirmacion.trim()}
-                className="w-full bg-primary text-white font-cormorant text-xl py-3 rounded-xl hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-white font-cormorant text-2xl py-4 rounded-xl hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Verificando...' : 'Continuar'}
               </button>
@@ -206,26 +206,26 @@ export default function Confirmacion() {
 
         {/* PASO 2: Formulario de confirmación */}
         {step === 2 && invitado && (
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <div className="text-center mb-6">
-              <h1 className="text-primary text-3xl font-garland mb-2">¡HOLA!</h1>
-              <p className="text-primary text-2xl font-cormorant font-semibold">{invitado.nombre}</p>
+          <div className="bg-white rounded-2xl shadow-lg p-10">
+            <div className="text-center mb-8">
+              <h1 className="text-primary text-4xl font-garland mb-3">¡HOLA!</h1>
+              <p className="text-primary text-3xl font-cormorant font-semibold">{invitado.nombre}</p>
               {evento && (
-                <p className="text-primary/70 font-cormorant mt-2">{evento.nombreEvento}</p>
+                <p className="text-primary/70 font-cormorant text-lg mt-2">{evento.nombreEvento}</p>
               )}
             </div>
 
-            <form onSubmit={handleConfirmar} className="space-y-6">
+            <form onSubmit={handleConfirmar} className="space-y-8">
               {/* Asistencia */}
               <div>
-                <label className="block text-primary font-cormorant text-lg mb-3">
+                <label className="block text-primary font-cormorant text-xl mb-4">
                   ¿Asistirás al evento?
                 </label>
                 <div className="flex gap-4">
                   <button
                     type="button"
                     onClick={() => setAsistira(true)}
-                    className={`flex-1 py-3 rounded-xl font-cormorant text-lg transition-all ${
+                    className={`flex-1 py-4 rounded-xl font-cormorant text-xl transition-all ${
                       asistira
                         ? 'bg-primary text-white'
                         : 'bg-primary/10 text-primary hover:bg-primary/20'
@@ -236,7 +236,7 @@ export default function Confirmacion() {
                   <button
                     type="button"
                     onClick={() => setAsistira(false)}
-                    className={`flex-1 py-3 rounded-xl font-cormorant text-lg transition-all ${
+                    className={`flex-1 py-4 rounded-xl font-cormorant text-xl transition-all ${
                       !asistira
                         ? 'bg-red-500 text-white'
                         : 'bg-red-50 text-red-500 hover:bg-red-100'
@@ -251,25 +251,25 @@ export default function Confirmacion() {
               {asistira && (
                 <>
                   <div>
-                    <label className="block text-primary font-cormorant text-lg mb-2">
+                    <label className="block text-primary font-cormorant text-xl mb-3">
                       ¿Cuántos pases confirmas? (máximo {invitado.pasesAsignados})
                     </label>
-                    <div className="flex items-center justify-center gap-4">
+                    <div className="flex items-center justify-center gap-5">
                       <button
                         type="button"
                         onClick={() => setPasesConfirmados(Math.max(1, pasesConfirmados - 1))}
-                        className="w-12 h-12 rounded-full bg-primary/10 text-primary text-2xl font-bold hover:bg-primary/20 transition-colors"
+                        className="w-14 h-14 rounded-full bg-primary/10 text-primary text-3xl font-bold hover:bg-primary/20 transition-colors"
                         disabled={pasesConfirmados <= 1}
                       >
                         -
                       </button>
-                      <span className="text-primary text-4xl font-cormorant font-bold w-16 text-center">
+                      <span className="text-primary text-5xl font-cormorant font-bold w-20 text-center">
                         {pasesConfirmados}
                       </span>
                       <button
                         type="button"
                         onClick={() => setPasesConfirmados(Math.min(invitado.pasesAsignados, pasesConfirmados + 1))}
-                        className="w-12 h-12 rounded-full bg-primary/10 text-primary text-2xl font-bold hover:bg-primary/20 transition-colors"
+                        className="w-14 h-14 rounded-full bg-primary/10 text-primary text-3xl font-bold hover:bg-primary/20 transition-colors"
                         disabled={pasesConfirmados >= invitado.pasesAsignados}
                       >
                         +
@@ -280,10 +280,10 @@ export default function Confirmacion() {
                   {/* Nombres de acompañantes */}
                   {pasesConfirmados > 1 && (
                     <div>
-                      <label className="block text-primary font-cormorant text-lg mb-2">
+                      <label className="block text-primary font-cormorant text-xl mb-3">
                         Nombres de tus acompañantes
                       </label>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {nombresAcompanantes.slice(0, pasesConfirmados - 1).map((nombre, index) => (
                           <input
                             key={index}
@@ -291,7 +291,7 @@ export default function Confirmacion() {
                             value={nombre}
                             onChange={(e) => handleAcompananteChange(index, e.target.value)}
                             placeholder={`Acompañante ${index + 1}`}
-                            className="w-full px-4 py-2 border-2 border-primary/30 rounded-xl font-cormorant focus:outline-none focus:border-primary transition-colors text-primary"
+                            className="w-full px-5 py-3 border-2 border-primary/30 rounded-xl font-cormorant text-lg focus:outline-none focus:border-primary transition-colors text-primary"
                           />
                         ))}
                       </div>
@@ -300,7 +300,7 @@ export default function Confirmacion() {
 
                   {/* Restricciones alimenticias */}
                   <div>
-                    <label className="block text-primary font-cormorant text-lg mb-2">
+                    <label className="block text-primary font-cormorant text-xl mb-3">
                       ¿Alguna restricción alimenticia? (opcional)
                     </label>
                     <input
@@ -308,7 +308,7 @@ export default function Confirmacion() {
                       value={restriccionesAlimenticias}
                       onChange={(e) => setRestriccionesAlimenticias(e.target.value)}
                       placeholder="Ej: Vegetariano, sin gluten, alergias..."
-                      className="w-full px-4 py-2 border-2 border-primary/30 rounded-xl font-cormorant focus:outline-none focus:border-primary transition-colors text-black"
+                      className="w-full px-5 py-3 border-2 border-primary/30 rounded-xl font-cormorant text-lg focus:outline-none focus:border-primary transition-colors text-black"
                     />
                   </div>
                 </>
@@ -316,7 +316,7 @@ export default function Confirmacion() {
 
               {/* Mensaje opcional */}
               <div>
-                <label className="block text-primary font-cormorant text-lg mb-2">
+                <label className="block text-primary font-cormorant text-xl mb-3">
                   Mensaje para los novios (opcional)
                 </label>
                 <textarea
@@ -324,12 +324,12 @@ export default function Confirmacion() {
                   onChange={(e) => setMensaje(e.target.value)}
                   placeholder="Escribe un mensaje especial..."
                   rows={3}
-                  className="w-full px-4 py-2 border-2 border-primary/30 rounded-xl font-cormorant focus:outline-none focus:border-primary transition-colors resize-none text-black"
+                  className="w-full px-5 py-3 border-2 border-primary/30 rounded-xl font-cormorant text-lg focus:outline-none focus:border-primary transition-colors resize-none text-black"
                 />
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-center font-cormorant">
+                <div className="bg-red-50 border border-red-200 text-red-700 px-5 py-4 rounded-xl text-center font-cormorant text-lg">
                   {error}
                 </div>
               )}
@@ -338,14 +338,14 @@ export default function Confirmacion() {
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="flex-1 bg-gray-200 text-gray-700 font-cormorant text-lg py-3 rounded-xl hover:bg-gray-300 transition-colors"
+                  className="flex-1 bg-gray-200 text-gray-700 font-cormorant text-xl py-4 rounded-xl hover:bg-gray-300 transition-colors"
                 >
                   Volver
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 bg-primary text-white font-cormorant text-lg py-3 rounded-xl hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  className="flex-1 bg-primary text-white font-cormorant text-xl py-4 rounded-xl hover:bg-primary/90 transition-colors disabled:opacity-50"
                 >
                   {loading ? 'Enviando...' : 'Confirmar'}
                 </button>
@@ -356,45 +356,45 @@ export default function Confirmacion() {
 
         {/* PASO 3: Confirmación exitosa */}
         {step === 3 && (
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-            <div className="mb-6">
-              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white rounded-2xl shadow-lg p-10 text-center">
+            <div className="mb-8">
+              <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h1 className="text-primary text-3xl font-garland mb-2">
+              <h1 className="text-primary text-4xl font-garland mb-3">
                 {asistira ? '¡GRACIAS!' : 'CONFIRMACIÓN'}
               </h1>
-              <h2 className="text-primary text-2xl font-garland mb-4">
+              <h2 className="text-primary text-3xl font-garland mb-4">
                 {asistira ? 'TE ESPERAMOS' : 'RECIBIDA'}
               </h2>
             </div>
 
             {asistira ? (
               <div className="space-y-4">
-                <p className="text-primary font-cormorant text-lg">
+                <p className="text-primary font-cormorant text-xl">
                   Tu asistencia ha sido confirmada con <strong>{pasesConfirmados}</strong> {pasesConfirmados === 1 ? 'pase' : 'pases'}.
                 </p>
-                <p className="text-primary/70 font-cormorant">
+                <p className="text-primary/70 font-cormorant text-lg">
                   ¡Nos vemos pronto!
                 </p>
               </div>
             ) : (
               <div className="space-y-4">
-                <p className="text-primary font-cormorant text-lg">
+                <p className="text-primary font-cormorant text-xl">
                   Lamentamos que no puedas acompañarnos.
                 </p>
-                <p className="text-primary/70 font-cormorant">
+                <p className="text-primary/70 font-cormorant text-lg">
                   ¡Gracias por informarnos!
                 </p>
               </div>
             )}
 
-            <div className="mt-8">
+            <div className="mt-10">
               <a
                 href="/"
-                className="inline-block bg-primary text-white font-cormorant text-lg px-8 py-3 rounded-xl hover:bg-primary/90 transition-colors"
+                className="inline-block bg-primary text-white font-cormorant text-xl px-10 py-4 rounded-xl hover:bg-primary/90 transition-colors"
               >
                 Volver al inicio
               </a>
