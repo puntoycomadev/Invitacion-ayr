@@ -10,7 +10,7 @@ export default function DateSection() {
       </div>
       <div className=' w-full px-10 flex flex-col relative z-10 max-w-[790px]'>
         <div className='text-[48px] font-light lg:text-[58px] text-primary leading-[1.25] tracking-[-0.7]'>
-          <p className='font-cormorant'>Nuestra felicidad se completa al compartirla con quienes amamos; por ello, Jehova Dios y ustedes será testigos  de nuestra promesa de amor en nuestra boda.</p>
+          <p className='font-cormorant'>Nuestra felicidad se completa al compartirla con quienes amamos; por ello, Jehová Dios y ustedes serán testigos  de nuestra promesa de amor en nuestra boda.</p>
         </div>
         <div className='pt-[30px] grid grid-cols-3 auto-rows-min gap-0 text-primary font-extrabold text-[28px] font-cormorant leading-[1.25] tracking-[-0.7] items-end'>
           <div className='border-b border-primary text-center' />

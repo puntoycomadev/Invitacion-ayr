@@ -19,9 +19,9 @@ export default function InfoSection() {
         <div className='w-full max-w-[130px]'>
           <img className='w-full' src='/calendario.svg' alt="Calendario" />
         </div>
-        <p className='text-primary text-[48px]  font-garland'>CONFIRMACION</p>
-        <p className='font-cormorant text-[48px] text-primary px-8 font-light  leading-[1.25] tracking-[-0.7] w-full max-w-[700px]'>Agradecemos que confirmes tu asistencia antes del Domingo 1 de Marzo de  2026:</p>
-        <a className=' font-cormorant text-[32px]  bg-[#434430] rounded-2xl px-4 py-2 text-[#EEEDED]' href='/confirmar' target='_blank' rel='noreferrer'>CONFIRMAR</a>
+        <p className='text-primary text-[48px]  font-garland'>CONFIRMACIÓN</p>
+        <p className='font-cormorant text-[48px] text-primary px-8 font-light  leading-[1.25] tracking-[-0.7] w-full max-w-[700px]'>Agradecemos que confirmes tu asistencia antes del Domingo 15 de Marzo de  2026:</p>
+        <a className=' font-cormorant text-[32px]  bg-[#434430] rounded-2xl px-4 py-2 text-[#EEEDED]' href='/confirmar'  rel='noreferrer'>CONFIRMAR</a>
       </div>
       <ScrollDownArrow />
     </section>
