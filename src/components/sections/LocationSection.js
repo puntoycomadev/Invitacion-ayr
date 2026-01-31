@@ -13,7 +13,7 @@ export default function LocationSection() {
             <img className='w-full' src='/salon-reino.svg' alt="Salón del reino" />
           </div>
           <p className='font-bold text-primary'>4:00 pm</p>
-          <p className='font-bold text-primary'>Salón del reino de los testigos de Jehová</p>
+          <p className='font-bold text-primary'>Salón del Reino de los Testigos de Jehová</p>
           <p className='text-primary'>Calle 12 de Octubre 7213, esquina con calle Chihuahua, Fracc. Chihuahua 31104</p>
           <a className='text-primary text-[32px] text-white bg-[#434430] rounded-xl mt-6 px-10 py-1   text-[#EEEDED]' href='https://maps.app.goo.gl/orXvuf3MbBk2g6W6A' target='_blank' rel='noreferrer'>UBICACIÓN</a>
         </div>
