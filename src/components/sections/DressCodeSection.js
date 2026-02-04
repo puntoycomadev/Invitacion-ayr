@@ -13,7 +13,7 @@ export default function DressCodeSection() {
         <div className='w-full max-w-[400px]'>
           <img src='/dress-code.svg' className='w-full' alt="Código de vestimenta" />
         </div>
-        <p className='text-primary font-light text-[48px]'>COLORES RESERVADOS</p>
+        <p className='text-primary font-light text-[48px]'>EVITAR ESTOS COLORES</p>
         <div className='w-full max-w-[400px]'>
           <img src='/colors.svg' className='w-full' alt="Colores reservados" />
         </div>
